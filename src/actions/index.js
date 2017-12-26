@@ -1,6 +1,6 @@
 let fs = require('fs')
 let path = require('path')
-let templateFormatter = require('string-template')
+let templateFormatter = require('mustache')
 
 // 获取组件的基础模版，用于输出生成文件
 let actionStringTemplate = fs.readFileSync(path.join(__dirname, 'template.js'), 'utf8')
@@ -15,13 +15,20 @@ exports.processor = function (actionsConfig, initSetting) {
 
   // 循环配置，创建对应的js文件
   actionsConfig.forEach(action => {
-    let { type = '', accessModifier = [], inputs = [], outputs = [], modifiedProps = [], tests = [] } = action
+    let { type = '', accessModifier = {}, inputs = [], outputs = [], modifiedProps = [], tests = [] } = action
+
+    let actionFilePath = `${actionsFolderPath}/${type}.js`
+
+    // action 如果是私有的，则添加指定前缀
+    if (accessModifier.private) {
+      actionFilePath = `${actionsFolderPath}/_private_${type}.js`
+    }
 
     // 写组件文件
     fs.writeFile(
-      `${actionsFolderPath}/${type}.js`,
+      actionFilePath,
 
-      templateFormatter(actionStringTemplate, action),
+      templateFormatter.render(actionStringTemplate, action),
 
       function (err) {
         if (err) {

@@ -75,15 +75,15 @@
 		"description": ["关闭主内容区域的功能实现函数"],
 
 		"accessModifier": {
-			"private": false,
-			"public": true,
+			"private": true,
+			"public": false,
 			"eventFlow": true
 		},
 
 		"inputs": [{
 			"type": "Percentage",
 			"name": "width",
-			"required": false,
+			"required": true,
 			"default": 65
 		}],
 
