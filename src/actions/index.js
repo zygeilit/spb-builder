@@ -5,8 +5,11 @@ let templateFormatter = require('mustache')
 // 获取组件的基础模版，用于输出生成文件
 let actionStringTemplate = fs.readFileSync(path.join(__dirname, 'template.js'), 'utf8')
 
+// 根目录
+let actionsFolderPath = ''
+
 exports.processor = function (actionsConfig, initSetting) {
-  let actionsFolderPath = `${initSetting.rootPath}/${initSetting.actionsFolder}`
+  actionsFolderPath = `${initSetting.rootPath}/${initSetting.actionsFolder}`
 
   // 创建组件目录
   if (!fs.existsSync(actionsFolderPath)) {
@@ -21,20 +24,12 @@ exports.processor = function (actionsConfig, initSetting) {
 
     // action 如果是私有的，则添加指定前缀
     if (accessModifier.private) {
-      let privateFolderPath = `${actionsFolderPath}/private`
-      if (!fs.existsSync(privateFolderPath)) {
-        fs.mkdirSync(privateFolderPath)
-      }
-      actionFilePath = `${privateFolderPath}/${type}.js`
+      actionFilePath = `${getPrivateFolder()}/${type}.js`
     }
 
     // action 如果是私有的，则添加指定前缀
     if (accessModifier.eventFlow) {
-      let eventFlowFolderPath = `${actionsFolderPath}/event-flows`
-      if (!fs.existsSync(eventFlowFolderPath)) {
-        fs.mkdirSync(eventFlowFolderPath)
-      }
-      actionFilePath = `${eventFlowFolderPath}/${type}.js`
+      actionFilePath = `${getEventFLowFolder()}/${type}.js`
     }
 
     // 写组件文件
@@ -49,4 +44,20 @@ exports.processor = function (actionsConfig, initSetting) {
       }
     )
   })
+}
+
+function getPrivateFolder () {
+  let privateFolderPath = `${actionsFolderPath}/private`
+  if (!fs.existsSync(privateFolderPath)) {
+    fs.mkdirSync(privateFolderPath)
+  }
+  return privateFolderPath
+}
+
+function getEventFLowFolder () {
+  let eventFlowFolderPath = `${actionsFolderPath}/event-flows`
+  if (!fs.existsSync(eventFlowFolderPath)) {
+    fs.mkdirSync(eventFlowFolderPath)
+  }
+  return eventFlowFolderPath
 }
