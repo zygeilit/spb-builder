@@ -1,0 +1,29 @@
+{
+  "name": "component-project-builder",
+  "version": "0.0.1",
+  "description": "auto builde component-like project use command",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zygeilit/component-project-builder.git"
+  },
+  "keywords": [
+    "automation",
+    "cli",
+    "builde",
+    "project",
+    "component",
+    "command",
+    "jstest",
+    "jsdoc"
+  ],
+  "author": "zygeilit@icloud.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zygeilit/component-project-builder/issues"
+  },
+  "homepage": "https://github.com/zygeilit/component-project-builder#readme"
+}
