@@ -21,7 +21,7 @@ exports.processor = function (actionsConfig, initSetting) {
     fs.writeFile(
       `${actionsFolderPath}/${type}.js`,
 
-      templateFormatter('{type}', action),
+      templateFormatter(actionStringTemplate, action),
 
       function (err) {
         if (err) {
