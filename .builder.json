@@ -1,0 +1,138 @@
+// JSON模式驱动组件开发的元数据
+// JOSN模式，吸收了UML驱动开发的优点（内部实现可见），摒弃了缺点（学习成本和维护成本高）
+// JSON模式提供的元数据，可以自动创建组建 目录文件 和 测试用例
+// JSON模式提供在组件生态系统中，依赖，继承，以及版本升级信息可见
+// JSON模式描述中提供了所有，组件内部不可见实现和细节，为使用者，开发者，继承者提供了可见的描述，不需要进入到代码内部实现，为生态圈提供了底层的基础
+
+// 通过JSON还可以用增强的方式开发的功能：
+// 1. 标准元数据基础上，可以提供在整个Beisen组件生态圈的依赖和引用情况，来判断升级可能带来的影响和破坏性升级后，老的实现什么时候可以删除
+// 2. 可以提供标准的元数据的编辑器，和文档界面，开发者更放的编辑和查看
+
+{
+	// 组件的标题描述用于 文档 和 Pagebuilder
+	"title": "两列布局组件",
+
+	// 组件的描述配置，用于pagebuilder，文档上
+	// 使用数据方式，文案的扩展性比字符串结构略强
+	"description": ["两列布局组件，提供了两个站位嘈", "左侧是主内容显示区域，右侧是相关信息区域"],
+
+	// 组件的类型，运行态的type，元数据渲染器使用的type
+	"type": "main-right-layout",
+
+	// 组件的主题，主题要描述该组件的风格
+	// 比如：当该组件在另一个组件内部时，样式会有所调整，这些调整都应该用theme实现，命名时应当是该组件的主题
+	// 命名不可以和其他组件有关
+	// 比如场景：组件在非Tab组件内部时有padding，反之没有padding，实现该场景的theme应该命名为 noBorder 类似，而不该 theme-in-tabContainer
+	// ------
+	// 多个主题可以联合使用
+	// ------
+	// 业务在做自定义样式时，可抽离以场景为级别的主题加入到基础组件中
+	"themes": [{
+		"type": "base"
+	}, {
+		"type": "noBorder",
+		"description": ["组件可切换的主题，在Tab组件内部可使用"]
+	}],
+
+	// 组件的描述
+	// 当是大型组件模块时，模块可能会暴露出多个组件，根组件，子组件，等
+	"components": [{
+
+		// 组件的类型
+		"type": "Layout",
+
+		// 组件接受的属性
+		"props": [{
+			"type": "Number",
+			"name": "mainPadding",
+			"default": 15
+		}, {
+			"type": "Boolean",
+			"name": "canFolding",
+			"default": true
+		}, {
+			"type": "Boolean",
+			"name": "isClosed",
+			"default": false
+		}, {
+			"type": "Object",
+			"name": "mainContainer",
+			// Object 类型的default中每个节点都是用来描述一个key-value
+			"default": [{
+				"type": "Percentage",
+				"name": "width",
+				"value": 65
+			}, {
+				"type": "Color",
+				"name": "backgroundColor",
+				"value": "red"
+			}]
+		}],
+
+		// 组件中对外暴露的课使用插槽
+		"slots": [{
+			"name": "main"
+		}, {
+			"name": "right"
+		}],
+
+		// 组件的可以配置的事件
+		// 模块一旦上线，就不可以有破坏性的更新，比如：输入和输出，参数，等
+		"events": [{
+			"type": "onFolding",
+			"description": ["组件折叠的时候抛出的事件"],
+
+			// 组件 $emit('onFolding') 抛出执行的事件
+			// 描述该事件在组件的哪几个阶段会执行该函数
+			// 自动构建工具自动在对应的阶段 emit函数，触发对应事件
+			// eslint工具通过 json模式描述，时时检测对应阶段是否调用了 该事件
+			"triggerOn": ["mountd", "eventHandler", "created"],
+
+			// 事件抛出的参数
+			// 可以抛出多个，多个参数以数组形式描述
+			"arguments": [{
+				"type": "Boolean",
+				"name": "isClosed"
+			}],
+
+			// 事件上在提交和调试阶段，运行的单元测试用例集合
+			// 在事件上应用的单元测试，可选择使用多个
+			"tests": ["onFoldingTest"]
+		}]
+	}],
+
+	// 模块对外暴露的action集合
+	// 事件一旦发布就不可以有破坏性的更新，只能新创建action
+	// 并且新旧action并存, 避免其他依赖者更新后错误
+	// 模块一旦上线，就不可以有破坏性的更新，比如：输入和输出，参数，等
+	"actions": [{
+		"type": "closeMainContainer",
+		"description": ["关闭主内容区域的功能实现函数"],
+
+		// 事件访问修饰符
+		// 标示可以使用的方式：组件内部事件，公开事件外部可用，可用于事件流函数中
+		// 生态系统中，事件函数使用方式对外部可见
+		// 文档系统中自动生成描述
+		"accessModifier": ["private", "public", "event-flows"],
+
+		// 描述该Action接受到的参数是什么（管道类型事件流实现依赖标准输入和输出）
+		"inputs": [{
+			"type": "Percentage", // 接受的参数是百分比类型
+			"name": "width", // 接受的参数名是 width
+			"required": false, // 该参数不是必须要传递的参数
+			"default": 65 // 未传入参数时，模式取65%
+		}],
+
+		// 事件的标准输出
+		"outputs": [
+			// ...
+		],
+		
+		// 事件需要修改的组件属性有哪些
+		"modifiedProps": ["isClosed", "mainContainer"],
+
+		// 事件上在提交和调试阶段，运行的单元测试用例集合
+		// 在事件上应用的单元测试，可选择使用多个
+		"tests": ["paramsTypeTest", "outputsTest"]
+	}]
+}
