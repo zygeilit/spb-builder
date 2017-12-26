@@ -7,7 +7,7 @@ var root = path.join(__dirname, '../')
 var builderConfig = JSON.parse(fs.readFileSync(`${root}.builder.json`, 'utf8'))
 
 var initSetting = {
-  'rootPath': './',
+  'rootPath': './demo',
   'componentsFolder': 'components',
   'actionsFolder': 'actions'
 }
