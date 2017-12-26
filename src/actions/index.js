@@ -27,7 +27,7 @@ exports.processor = function (actionsConfig, initSetting) {
         if (err) {
           return console.log(err)
         }
-        console.log("The file was saved!")
+        console.log(`The file '${type}' was saved!`)
       }
     )
   })

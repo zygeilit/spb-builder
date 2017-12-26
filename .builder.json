@@ -31,15 +31,17 @@
 		}, {
 			"type": "Object",
 			"name": "mainContainer",
-			"default": [{
-				"type": "Percentage",
-				"name": "width",
-				"value": 65
-			}, {
-				"type": "Color",
-				"name": "backgroundColor",
-				"value": "red"
-			}]
+			"default": {
+				"width": {
+					"type": "Percentage",
+					"value": 65
+				},
+				"backgroundColor": {
+					"type": "Color",
+					"value": "red"
+				}
+
+			}
 		}],
 
 		"slots": [{
@@ -52,11 +54,16 @@
 			"type": "onFolding",
 			"description": ["组件折叠的时候抛出的事件"],
 
-			"triggerOn": ["mountd", "eventHandler", "created"],
+			"triggerOn": {
+				"mountd": true,
+				"eventHandler": true,
+				"created": true
+			},
 
 			"arguments": [{
 				"type": "Boolean",
-				"name": "isClosed"
+				"name": "isClosed",
+				"default": false
 			}],
 
 			"tests": ["onFoldingTest"]
@@ -67,7 +74,11 @@
 		"type": "closeMainContainer",
 		"description": ["关闭主内容区域的功能实现函数"],
 
-		"accessModifier": ["private", "public", "event-flows"],
+		"accessModifier": {
+			"private": false,
+			"public": true,
+			"eventFlow": true
+		},
 
 		"inputs": [{
 			"type": "Percentage",
