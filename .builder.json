@@ -87,8 +87,9 @@
 			"default": 65
 		}],
 
-		"outputs": [
-		],
+		"outputs": [{
+			"name": "containerWidth"
+		}],
 		
 		"modifiedProps": ["isClosed", "mainContainer"],
 
