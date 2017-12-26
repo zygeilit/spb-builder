@@ -77,7 +77,7 @@
 		"accessModifier": {
 			"private": true,
 			"public": false,
-			"eventFlow": true
+			"eventFlow": false
 		},
 
 		"inputs": [{

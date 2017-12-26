@@ -21,7 +21,20 @@ exports.processor = function (actionsConfig, initSetting) {
 
     // action 如果是私有的，则添加指定前缀
     if (accessModifier.private) {
-      actionFilePath = `${actionsFolderPath}/_private_${type}.js`
+      let privateFolderPath = `${actionsFolderPath}/private`
+      if (!fs.existsSync(privateFolderPath)) {
+        fs.mkdirSync(privateFolderPath)
+      }
+      actionFilePath = `${privateFolderPath}/${type}.js`
+    }
+
+    // action 如果是私有的，则添加指定前缀
+    if (accessModifier.eventFlow) {
+      let eventFlowFolderPath = `${actionsFolderPath}/event-flows`
+      if (!fs.existsSync(eventFlowFolderPath)) {
+        fs.mkdirSync(eventFlowFolderPath)
+      }
+      actionFilePath = `${eventFlowFolderPath}/${type}.js`
     }
 
     // 写组件文件
