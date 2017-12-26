@@ -20,9 +20,7 @@ exports.processor = function (componentsConfig, initSetting) {
     // 写组件文件
     fs.writeFile(
       `${componentsFolderPath}/${type}.vue`,
-
       templateFormatter.render(componentStringTemplate, component),
-
       function (err) {
         if (err) {
           return console.log(err)

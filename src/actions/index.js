@@ -40,9 +40,7 @@ exports.processor = function (actionsConfig, initSetting) {
     // 写组件文件
     fs.writeFile(
       actionFilePath,
-
       templateFormatter.render(actionStringTemplate, action),
-
       function (err) {
         if (err) {
           return console.log(err)
