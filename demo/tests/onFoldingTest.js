@@ -1,7 +1,7 @@
 
 export default () => {
-  describe('Demo测试用例', () => {
-    it('demo ==> 1', () => {
+  describe('', () => {
+    it('onFoldingTest', () => {
       expect(true).toBe(false)
     })
   })

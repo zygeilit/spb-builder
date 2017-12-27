@@ -18,7 +18,8 @@ exports.processor = function (testsConfig, initSetting) {
 
   // 循环配置，创建对应的js文件
   testsConfig.forEach(test => {
-    let { type = '' } = test
+    let { type = '', targets = {} } = test
+    let { actions = [] } = targets
 
     // 写组件文件
     fs.writeFile(

@@ -41,7 +41,6 @@
           "type": "Color",
           "value": "red"
         }
-
       }
     }],
 
@@ -65,14 +64,13 @@
         "type": "Boolean",
         "name": "isClosed",
         "default": false
-      }],
-
-      "tests": ["onFoldingTest"]
+      }]
     }]
   }],
 
   "actions": [{
     "type": "closeMainContainer",
+
     "description": ["关闭主内容区域的功能实现函数"],
 
     "accessModifier": {
@@ -91,14 +89,18 @@
     "outputs": [{
       "name": "containerWidth"
     }],
-    
+
     "modifiedProps": ["isClosed", "mainContainer"],
 
-    "tests": ["paramsTypeTest", "outputsTest"]
+    "tests": ["paramsTypeTest"]
   }],
 
   "tests": [{
-    "type": "paramsTypeTest"
+    "type": "paramsTypeTest",
+    "description": "测试Action参数是否符合规则",
+    "targets": {
+      "actions": ["closeMainContainer"]
+    }
   }, {
     "type": "outputsTest"
   }, {

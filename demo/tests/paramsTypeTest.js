@@ -1,7 +1,8 @@
+import paramsTypeTest from './paramsTypeTest'
 
 export default () => {
-  describe('Demo测试用例', () => {
-    it('demo ==> 1', () => {
+  describe('测试Action参数是否符合规则', () => {
+    it('paramsTypeTest', () => {
       expect(true).toBe(false)
     })
   })

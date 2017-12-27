@@ -1,7 +1,10 @@
+{{ #targets.actions }}
+import {{ type }} from './{{ type }}'
+{{ /targets.actions }}
 
 export default () => {
-  describe('Demo测试用例', () => {
-    it('demo ==> 1', () => {
+  describe('{{ description }}', () => {
+    it('{{ type }}', () => {
       expect(true).toBe(false)
     })
   })

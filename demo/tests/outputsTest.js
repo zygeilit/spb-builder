@@ -1,7 +1,7 @@
 
 export default () => {
-  describe('Demo测试用例', () => {
-    it('demo ==> 1', () => {
+  describe('', () => {
+    it('outputsTest', () => {
       expect(true).toBe(false)
     })
   })
