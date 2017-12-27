@@ -20,18 +20,18 @@ exports.processor = function (actionsConfig, initSetting) {
   actionsConfig.forEach(action => {
     let { type = '', accessModifier = {}, inputs = [], outputs = [], modifiedProps = [], tests = [] } = action
 
-    let testFilePath = `${testsFolderPath}/${type}.js`
-
-    // 写组件文件
-    fs.writeFile(
-      testFilePath,
-      templateFormatter.render(testStringTemplate, action),
-      function (err) {
-        if (err) {
-          return console.log(err)
+    tests.forEach(testFileName => {
+      // 写组件文件
+      fs.writeFile(
+        `${testsFolderPath}/${testFileName}.js`,
+        templateFormatter.render(testStringTemplate, action),
+        function (err) {
+          if (err) {
+            return console.log(err)
+          }
+          console.log(`The file '${testFileName}' was saved!`)
         }
-        console.log(`The file '${type}' was saved!`)
-      }
-    )
+      )
+    })
   })
 }
