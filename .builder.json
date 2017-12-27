@@ -95,5 +95,13 @@
     "modifiedProps": ["isClosed", "mainContainer"],
 
     "tests": ["paramsTypeTest", "outputsTest"]
+  }],
+
+  "tests": [{
+    "type": "paramsTypeTest"
+  }, {
+    "type": "outputsTest"
+  }, {
+    "type": "onFoldingTest"
   }]
 }

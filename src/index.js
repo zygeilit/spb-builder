@@ -17,5 +17,5 @@ var initSetting = {
 
 componentsProcessor.processor(builderConfig.components, initSetting)
 actionsProcessor.processor(builderConfig.actions, initSetting)
-testsProcessor.processor(builderConfig.actions, initSetting)
+testsProcessor.processor(builderConfig.tests, initSetting)
 
