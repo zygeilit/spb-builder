@@ -8,7 +8,7 @@ let testStringTemplate = fs.readFileSync(path.join(__dirname, 'template.js'), 'u
 // 根目录
 let testsFolderPath = ''
 
-exports.processor = function (testsConfig, initSetting) {
+exports.processor = function (actionsConfig, initSetting) {
   testsFolderPath = `${initSetting.rootPath}/${initSetting.testsFolder}`
 
   // 创建组件目录
@@ -17,15 +17,15 @@ exports.processor = function (testsConfig, initSetting) {
   }
 
   // 循环配置，创建对应的js文件
-  testsConfig.forEach(test => {
-    let {  } = test
+  actionsConfig.forEach(action => {
+    let { type = '', accessModifier = {}, inputs = [], outputs = [], modifiedProps = [], tests = [] } = action
 
     let testFilePath = `${testsFolderPath}/${type}.js`
 
     // 写组件文件
     fs.writeFile(
       testFilePath,
-      templateFormatter.render(testStringTemplate, test),
+      templateFormatter.render(testStringTemplate, action),
       function (err) {
         if (err) {
           return console.log(err)

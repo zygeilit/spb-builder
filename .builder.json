@@ -1,98 +1,99 @@
+
 {
-	"title": "两列布局组件",
+  "title": "两列布局组件",
 
-	"description": ["两列布局组件，提供了两个站位嘈", "左侧是主内容显示区域，右侧是相关信息区域"],
+  "description": ["两列布局组件，提供了两个站位嘈", "左侧是主内容显示区域，右侧是相关信息区域"],
 
-	"type": "main-right-layout",
+  "type": "main-right-layout",
 
-	"themes": [{
-		"type": "base"
-	}, {
-		"type": "noBorder",
-		"description": ["组件可切换的主题，在Tab组件内部可使用"]
-	}],
+  "themes": [{
+    "type": "base"
+  }, {
+    "type": "noBorder",
+    "description": ["组件可切换的主题，在Tab组件内部可使用"]
+  }],
 
-	"components": [{
+  "components": [{
 
-		"type": "Layout",
+    "type": "Layout",
 
-		"props": [{
-			"type": "Number",
-			"name": "mainPadding",
-			"default": 15
-		}, {
-			"type": "Boolean",
-			"name": "canFolding",
-			"default": true
-		}, {
-			"type": "Boolean",
-			"name": "isClosed",
-			"default": false
-		}, {
-			"type": "Object",
-			"name": "mainContainer",
-			"default": {
-				"width": {
-					"type": "Percentage",
-					"value": 65
-				},
-				"backgroundColor": {
-					"type": "Color",
-					"value": "red"
-				}
+    "props": [{
+      "type": "Number",
+      "name": "mainPadding",
+      "default": 15
+    }, {
+      "type": "Boolean",
+      "name": "canFolding",
+      "default": true
+    }, {
+      "type": "Boolean",
+      "name": "isClosed",
+      "default": false
+    }, {
+      "type": "Object",
+      "name": "mainContainer",
+      "default": {
+        "width": {
+          "type": "Percentage",
+          "value": 65
+        },
+        "backgroundColor": {
+          "type": "Color",
+          "value": "red"
+        }
 
-			}
-		}],
+      }
+    }],
 
-		"slots": [{
-			"name": "main"
-		}, {
-			"name": "right"
-		}],
+    "slots": [{
+      "name": "main"
+    }, {
+      "name": "right"
+    }],
 
-		"events": [{
-			"type": "onFolding",
-			"description": ["组件折叠的时候抛出的事件"],
+    "events": [{
+      "type": "onFolding",
+      "description": ["组件折叠的时候抛出的事件"],
 
-			"triggerOn": {
-				"mountd": true,
-				"eventHandler": true,
-				"created": true
-			},
+      "triggerOn": {
+        "mountd": true,
+        "eventHandler": true,
+        "created": true
+      },
 
-			"arguments": [{
-				"type": "Boolean",
-				"name": "isClosed",
-				"default": false
-			}],
+      "arguments": [{
+        "type": "Boolean",
+        "name": "isClosed",
+        "default": false
+      }],
 
-			"tests": ["onFoldingTest"]
-		}]
-	}],
+      "tests": ["onFoldingTest"]
+    }]
+  }],
 
-	"actions": [{
-		"type": "closeMainContainer",
-		"description": ["关闭主内容区域的功能实现函数"],
+  "actions": [{
+    "type": "closeMainContainer",
+    "description": ["关闭主内容区域的功能实现函数"],
 
-		"accessModifier": {
-			"private": true,
-			"public": false,
-			"eventFlow": false
-		},
+    "accessModifier": {
+      "private": true,
+      "public": false,
+      "eventFlow": false
+    },
 
-		"inputs": [{
-			"type": "Percentage",
-			"name": "width",
-			"required": true,
-			"default": 65
-		}],
+    "inputs": [{
+      "type": "Percentage",
+      "name": "width",
+      "required": true,
+      "default": 65
+    }],
 
-		"outputs": [{
-			"name": "containerWidth"
-		}],
-		
-		"modifiedProps": ["isClosed", "mainContainer"],
+    "outputs": [{
+      "name": "containerWidth"
+    }],
+    
+    "modifiedProps": ["isClosed", "mainContainer"],
 
-		"tests": ["paramsTypeTest", "outputsTest"]
-	}]
+    "tests": ["paramsTypeTest", "outputsTest"]
+  }]
 }
