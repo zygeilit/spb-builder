@@ -13,6 +13,12 @@
     "description": ["组件可切换的主题，在Tab组件内部可使用"]
   }],
 
+  "dependencies": [{
+    "type": "base-layout",
+    "actions": ["foldingContainer"],
+    "components": ["BaseLayout"]
+  }],
+
   "components": [{
 
     "type": "Layout",

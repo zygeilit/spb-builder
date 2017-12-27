@@ -1,3 +1,4 @@
+
 import paramsTypeTest from './paramsTypeTest'
 
 export default () => {
