@@ -6,7 +6,10 @@ var actionsProcessor = require('./actions/index')
 var testsProcessor = require('./tests/index')
 
 var root = path.join(__dirname, '../')
-var builderConfig = JSON.parse(fs.readFileSync(`${root}.builder.json`, 'utf8'))
+
+var builderConfigString = fs.readFileSync(`${root}.builder.json`, 'utf8')
+var builderConfigStringNoAnnotation = builderConfigString.replace(/\/\*\*[\s\S]+?\*\//ig, '')
+var builderConfig = JSON.parse(builderConfigStringNoAnnotation)
 
 var initSetting = {
   'rootPath': './demo',

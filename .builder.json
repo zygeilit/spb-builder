@@ -13,11 +13,27 @@
     "description": ["组件可切换的主题，在Tab组件内部可使用"]
   }],
 
-  "dependencies": [{
-    "type": "base-layout",
-    "actions": ["foldingContainer"],
-    "components": ["BaseLayout"]
-  }],
+  "dependencies": {
+
+    /**
+    * 注册当前模块依赖了哪些其他模块
+    * 较 package.json 不同的是，这里的注册更为细节
+    * 旨在解决，组件模块产生依赖时，版本升级后不兼容更新的异常自动化捕获（代码扫描）
+    */
+    "base-layout": {
+
+      /** 注册应用base-layout组件时，使用了的功能 */
+      "dependencies": {
+        "actions": ["foldingContainer"],
+        "components": ["BaseLayout"]    
+      },
+
+      /** 注册应用base-layout组件时，扩展的功能 */
+      "extends": {
+        "actions": ["foldingContainer"]
+      }
+    }
+  },
 
   "components": [{
 
