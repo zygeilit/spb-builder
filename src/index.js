@@ -7,7 +7,7 @@ var testsProcessor = require('./tests/index')
 
 var root = path.join(__dirname, '../')
 
-var builderConfigString = fs.readFileSync(`${root}.builder.json`, 'utf8')
+var builderConfigString = fs.readFileSync(`${root}.builder.js`, 'utf8')
 var builderConfigStringNoAnnotation = builderConfigString.replace(/\/\*\*[\s\S]+?\*\//ig, '')
 var builderConfig = JSON.parse(builderConfigStringNoAnnotation)
 
