@@ -6,8 +6,8 @@
   "scripts": {
     "run": "node src/index.js"
   },
-  "bin" : {
-    "builder-json-init" : "./bin/builder-json-init"
+  "bin": {
+    "builder-json-init": "./bin/builder-json-init"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,10 @@
   },
   "homepage": "https://github.com/zygeilit/component-project-builder#readme",
   "dependencies": {
+    "chalk": "^2.3.0",
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.12.2",
     "mustache": "^2.3.0",
     "string-template": "^1.0.0"
   }
