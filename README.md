@@ -23,3 +23,7 @@
 
 * 通过 .builder.js 可实现用命令的方式执行标准化功能，比如：
   * 通过 core + .builder.js 对版本的破坏性更新的扫描的报警, 见 .builder.js 中的 ‘dependencies’ 描述
+
+### 下一步要解决问题：
+* 自动创建 .builder.js 的工具和模版
+* 打磨 .builder.js 的细节
