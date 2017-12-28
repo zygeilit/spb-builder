@@ -7,7 +7,9 @@
     "run": "node src/index.js"
   },
   "bin": {
-    "builder-json-init": "./bin/builder-json-init"
+    "create": "./bin/create",
+    "extend": "./bin/extend",
+    "upgrade": "./bin/upgrade"
   },
   "repository": {
     "type": "git",
