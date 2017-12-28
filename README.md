@@ -8,10 +8,10 @@
 
 > 通过 .builder.js，使用命令的方式创建前端项目标准项目，比如：
 
->   1. 创建目录结构，文件
+*   1. 创建目录结构，文件
 
->   2. 创建对象之间的依赖引用关系
+*   2. 创建对象之间的依赖引用关系
 
->   3. 通过 .builder.js 可实现用命令的方式执行标准化功能，比如：
+*   3. 通过 .builder.js 可实现用命令的方式执行标准化功能，比如：
 
->      a. 通过 core + .builder.js 对版本的破坏性更新的扫描的报警, 见 .builder.js 中的 ‘dependencies’ 描述
+*      a. 通过 core + .builder.js 对版本的破坏性更新的扫描的报警, 见 .builder.js 中的 ‘dependencies’ 描述
