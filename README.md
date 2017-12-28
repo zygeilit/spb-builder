@@ -27,3 +27,4 @@
 ### 下一步要解决问题：
 * 自动创建 .builder.js 的工具和模版
 * 打磨 .builder.js 的细节
+* .builder.js 文件本身的版本号问题
