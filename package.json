@@ -6,6 +6,9 @@
   "scripts": {
     "run": "node src/index.js"
   },
+  "bin" : {
+    "builder-json-init" : "./bin/builder-json-init"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zygeilit/component-project-builder.git"
