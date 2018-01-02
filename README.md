@@ -6,26 +6,26 @@
 拥抱变化和未知的设计思路，在builder中提供了很好的功能插拔机制，任何新的功能都可以快速添加
 
 builder提供了三大块模块：
-* **.builder.json**：描述模块内部细节的JOSN格式的元数据描述
-* **.builder.cli**：在标准化项目本地可执行的命令工具模块
-* **.builder.server**：在服务端Push之后，基于.builder.json执行操作的模块
+* .builder.json：描述模块内部细节的JOSN格式的元数据描述
+* .builder.cli：在标准化项目本地可执行的命令工具模块
+* .builder.server：在服务端Push之后，基于.builder.json执行操作的模块
 
 ### .builder.json
 * 描述模块实现细节的JSON结构数据
 * 前端组件模块实现标准化的manifest文件
-* 借鉴 **package.json** 实现标准化的设计思想，区别是前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
+* 借鉴 package.json 实现标准化的设计思想，区别是前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
 
 ### .builder.cli
-通过解析 **.builder.json**，可实现从创建到监测的一体化流程，减少开发工作量，减少异常
+通过解析 .builder.json，可实现从创建到监测的一体化流程，减少开发工作量，减少异常
 
-* 基于 **.builder.json** 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
-* 基于 **.builder.json** 中的 **"extends"** 配置，升级依赖模块时自动扫描更新异常，并报警
+* 基于 .builder.json 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
+* 基于 .builder.json 中的 "extends" 配置，升级依赖模块时自动扫描更新异常，并报警
 
 #### builder.cli 设计图：
 ![images](/builder.png "设计思路")
 
 ### .builder.server
-通过WebHook，在Push结束之后，提取**.builder.json**文件，通过内部的模块细节的描述执行一系列的操作，例如：在push之后通过**.builder.json**中的“docs”描述，提取项目中的文档，更新到统一文档站点上，在该站点上可以看到公司内部所有模块的文档以及可使用的搜索功能
+通过WebHook，在Push结束之后，提取.builder.json文件，通过内部的模块细节的描述执行一系列的操作，例如：在push之后通过.builder.json中的“docs”描述，提取项目中的文档，更新到统一文档站点上，在该站点上可以看到公司内部所有模块的文档以及可使用的搜索功能
 
 #### .builer.server 设计图：
 ![images](/githooks.png "服务端标准化")
