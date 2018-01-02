@@ -14,7 +14,7 @@
 
 ### 服务端实现
 通过Webhooks实现服务端的标准话功能
-![images](/webhooks.png "服务端标准化")
+![images](/githooks.png "服务端标准化")
 
 ### .builder.js
 前端组件模块的实现标准化的manifest文件，描述了所有的设计细节，
