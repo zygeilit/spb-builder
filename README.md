@@ -15,7 +15,7 @@ builder提共了三大块模块：
 
 前端组件模块的实现标准化的manifest文件，描述了所有的设计细节
 
-借鉴 package.json + Node 实现模块标准化的思路，对于 .builder.json 和 package.json 不同点在前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
+借鉴 package.json 实现标准化的思路，对于.builder.json和package.json不同点，前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
 
 ### .builder.cli
 基于 .builder.js 的命令集模块，可实现自动化功能，减少开发工作量，减少异常
@@ -26,10 +26,7 @@ builder提共了三大块模块：
 ![images](/builder.png "设计思路")
 
 ### .builder.server
-根据 .builder.json 提供的描述，针对于前端组件开发问题，提供标准化化方案，如：
-
-* 通过 .builder.js 可实现用命令的方式执行标准化功能，比如：
-  * 通过 core + .builder.js 对版本的破坏性更新的扫描的报警, 见 .builder.js 中的 ‘dependencies’ 描述
+通过WebHook，在Push结束之后，提取.builder.json文件，通过内部的模块细节的描述执行一系列的操作，例如：在push之后通过.builder.json中的“docs”描述，提取项目中的文档，更新到统一文档站点上，在该站点上可以看到公司内部所有模块的文档以及可使用的搜索功能
 
 #### .builer.server 设计图：
 ![images](/githooks.png "服务端标准化")
