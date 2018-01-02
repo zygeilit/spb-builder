@@ -31,6 +31,14 @@ builder提共了三大块模块：
 #### .builer.server 设计图：
 ![images](/githooks.png "服务端标准化")
 
+### 总结
+cli和server都围绕着.builder.json实现，让标准化功能的实现更具可扩展性
+
+使用者可根据具体场景编写.builder.json中的描述实现标准化功能，未被描述的标准化功不会被执行，让使用者更具选择性
+
+只需要在项目中添加.builder.json, 引入cli模块，在jenkins中添加server，即可实现标准化，可以让搭建标准化更为方便
+
+对于builder的核心是：.builder.json；这是拥抱变化和未知的设计方式，让添加新特性和重构新特性时更方便
 
 ### 下一步要解决问题：
 * 自动创建 .builder.js 的工具和模版
