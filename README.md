@@ -18,8 +18,8 @@ builder提供了三大块模块：
 ### .builder.cli
 通过解析.builder.json，可实现从创建到监测的一体化流程，减少开发工作量，减少异常
 
-* 基于.builder.json中的配置自动创建目录、目录内文件、以文件之间及依赖关系
-* 基于.builder.json中的 "extends" 配置，升级依赖模块时自动扫描更新异常，并报警
+* 基于 **.builder.json** 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
+* 基于 **.builder.json** 中的 **"extends"** 配置，升级依赖模块时自动扫描更新异常，并报警
 
 #### builder.cli 设计图：
 ![images](/builder.png "设计思路")
