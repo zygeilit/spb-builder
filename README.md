@@ -1,6 +1,4 @@
 
-# component-project-builder
-
 前端组件标准化方案，目前是一套设计方案，还未开始实现
 
 拥抱变化和未知的设计思路，在builder中提供了很好的功能插拔机制，任何新的功能都可以快速添加
@@ -18,7 +16,7 @@ builder提供了三大块模块：
 借鉴 package.json 实现标准化的思路，对于.builder.json和package.json不同点，前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
 
 ### .builder.cli
-基于 .builder.js 的命令集模块，可实现自动化功能，减少开发工作量，减少异常
+* 基于 .builder.js 的命令集模块，可实现自动化功能，减少开发工作量，减少异常
 * 通过 builder.cli 根据 .builder.json 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
 * 通过 builder.cli 根据 .builder.json 中的模块依赖的配置（eg: "extends"），升级依赖模块时自动扫描不兼容更新异常，并报警
 
