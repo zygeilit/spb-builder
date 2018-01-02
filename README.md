@@ -16,9 +16,10 @@ builder提供了三大块模块：
 * 借鉴 package.json 实现标准化的设计思想，区别是前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
 
 ### .builder.cli
-* 基于 .builder.js 的命令集模块，可实现从创建到监测的一体化流程，减少开发工作量，减少异常
-* 通过 builder.cli 根据 .builder.json 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
-* 通过 builder.cli 根据 .builder.json 中的模块依赖的配置（eg: "extends"），升级依赖模块时自动扫描更新异常，并报警
+通过解析.builder.json，可实现从创建到监测的一体化流程，减少开发工作量，减少异常
+
+* 基于.builder.json中的配置自动创建目录、目录内文件、以文件之间及依赖关系
+* 基于.builder.json中的 "extends" 配置，升级依赖模块时自动扫描更新异常，并报警
 
 #### builder.cli 设计图：
 ![images](/builder.png "设计思路")
