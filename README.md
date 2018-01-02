@@ -14,7 +14,7 @@
 * 通过 builder.cli 根据 .builder.js 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
 * 通过 builder.cli 根据 .builder.js 中的模块依赖的配置（eg: "extends"），升级依赖模块时自动扫描不兼容更新异常，并报警
 
-##### builder.cli 设计图
+#### builder.cli 设计图
 ![images](/builder.png "设计思路")
 
 ### 服务端实现
