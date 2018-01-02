@@ -7,6 +7,10 @@
 ### 设计思路
 ![images](/builder.png "设计思路")
 
+### 服务端实现
+通过Webhooks实现服务端的标准话功能
+![images](/webhooks.png "服务端标准化")
+
 ### .builder.js
 前端组件模块的实现标准化的manifest文件，描述了所有的设计细节，
 
@@ -29,3 +33,7 @@
 * 打磨 .builder.js 的细节
 * .builder.js 文件本身的版本号问题
 * CSS扩展以及使用的标准方式
+
+### 知识
+https://developer.atlassian.com/blog/2015/11/scripting-with-node/
+https://github.com/tj/commander.js
