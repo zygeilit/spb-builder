@@ -27,7 +27,7 @@
 * 基于 .builder.json 中的 "extends" 配置，升级依赖模块时自动扫描更新异常，并报警
 
 #### builder.cli 设计图：
-![images](/builder.png "设计思路")
+![images](/builder1.png "设计思路")
 
 ### .builder.server
 通过WebHook，在Push结束之后，提取.builder.json文件，通过内部的模块细节的描述执行一系列的操作，例如：在push之后通过.builder.json中的“docs”描述，提取项目中的文档，更新到统一文档站点上，在该站点上可以看到公司内部所有模块的文档以及可使用的搜索功能
