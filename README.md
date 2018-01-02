@@ -5,7 +5,7 @@
 
 拥抱变化和未知的设计思路，在builder中提供了很好的功能插拔机制，任何新的功能都可以快速添加
 
-builder提共了三大块模块：
+builder提供了三大块模块：
 * 项目细节的描述（.builder.json）：描述模块内部细节的JOSN格式的元数据描述
 * 项目本地命令集（.builder.cli）：在标准化项目本地可执行的命令工具模块
 * 服务端WebHook（.builder.server）：在服务端Push之后，基于.builder.json执行操作的模块
