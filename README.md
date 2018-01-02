@@ -1,6 +1,11 @@
+
 # component-project-builder
 
-前端组件模块化开发的标准执行方案，是一套设计思想和实现方案
+前端组件标准化方案，目前是一套设计方案，还未开始实现
+
+标准化可将功能分层，分为私有功能和标准化功能。标准化功能类似于模块文档站点，模块依赖更新后的不兼容API扫描等
+
+简单的理解标准化的实现，其实就是一个描述模块必要细节的JSON结构数据：".builder.js"
 
 不只是为了解决目前出现的前端开发问题，而是一套拥抱变化和未知，即：.builder.js，所有已知或未知的前端标准化功能，都可以根据 .builder.js 实现，只需要在 .core.sh 中加入实现标准化的功能命令
 
@@ -36,4 +41,5 @@
 
 ### 知识
 https://developer.atlassian.com/blog/2015/11/scripting-with-node/
+
 https://github.com/tj/commander.js
