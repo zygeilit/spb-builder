@@ -10,6 +10,9 @@ builder提供了三大块模块：
 * .builder.cli：在标准化项目本地可执行的命令工具模块
 * .builder.server：在服务端Push之后，基于.builder.json执行操作的模块
 
+---
+
+
 ### .builder.json
 * 描述模块实现细节的JSON结构数据
 * 前端组件模块实现标准化的manifest文件
