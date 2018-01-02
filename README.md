@@ -5,9 +5,10 @@
 
 拥抱变化和未知的设计思路，在builder中提供了很好的功能插拔机制，任何新的功能都可以快速添加
 
-builder提出了三个对象：
-* 1. 描述对象（.builder.json），模块内部细节的JOSN格式的元数据描述
-* 2. 功能命令集（.builder.cli），
+builder提共了三大块功能实现：
+* 描述对象（.builder.json）：模块内部细节的JOSN格式的元数据描述
+* 功能命令集（.builder.cli）：
+* 服务端WebHook（.builder.server）：解析.builder.json执行标准化的功能
 
 ### .builder.json
 简单的理解标准化的实现，其实就是一个描述模块必要细节的JSON结构数据：".builder.json"
