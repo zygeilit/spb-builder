@@ -11,16 +11,16 @@ builder提共了三大块模块：
 * 服务端WebHook（.builder.server）：在服务端Push之后，基于.builder.json执行操作的模块
 
 ### .builder.json
-简单的理解标准化的实现，其实就是一个描述模块必要细节的JSON结构数据：".builder.json"
+* 描述模块实现细节的JSON结构数据
 
-前端组件模块的实现标准化的manifest文件，描述了所有的设计细节
+* 前端组件模块实现标准化的manifest文件
 
-借鉴 package.json 实现标准化的思路，对于.builder.json和package.json不同点，前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
+* 借鉴 package.json 实现标准化的设计思想，区别是前者用于解决模块的版本依赖管理，后者更侧重于描述组件模块的开发实现细节
 
 ### .builder.cli
-基于 .builder.js 的命令集模块，可实现自动化功能，减少开发工作量，减少异常
+基于 .builder.js 的命令集模块，可实现从创建到监测的一体化流程，减少开发工作量，减少异常
 * 通过 builder.cli 根据 .builder.json 中的配置自动创建目录、目录内文件、以文件之间及依赖关系
-* 通过 builder.cli 根据 .builder.json 中的模块依赖的配置（eg: "extends"），升级依赖模块时自动扫描不兼容更新异常，并报警
+* 通过 builder.cli 根据 .builder.json 中的模块依赖的配置（eg: "extends"），升级依赖模块时自动扫描更新异常，并报警
 
 #### builder.cli 设计图：
 ![images](/builder.png "设计思路")
