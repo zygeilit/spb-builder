@@ -41,16 +41,3 @@
 * 只需要在项目中添加.builder.json, 引入cli模块，在jenkins中添加server，即可实现标准化，可以让搭建标准化更为方便
 * 对于builder的核心是：.builder.json；这是拥抱变化和未知的设计方式，让添加新特性和重构新特性时更方便
 * 拥抱变化和未知的设计思路，在builder中提供了很好的功能插拔机制，任何新的功能都可以快速添加
-
-### 下一步要解决问题：
-* 自动创建.builder.json的工具和模版
-* .builder.json细节
-* .builder.json文件本身的版本号问题
-* CSS扩展以及使用的标准方式
-* 提供标准化方案，让平台组件吸收业务组件
-
-### 知识
-基于package.json中的bin实现命令注入的文档
-> https://developer.atlassian.com/blog/2015/11/scripting-with-node/
-
-> https://github.com/tj/commander.js
