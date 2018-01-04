@@ -1,5 +1,5 @@
 {
-  "name": "component-project-builder",
+  "name": "project-builder",
   "version": "0.0.1",
   "description": "auto builde component-like project use command",
   "main": "src/index.js",
