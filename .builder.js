@@ -2,13 +2,6 @@
 {
   "type": "main-right-layout",
 
-  "themes": [{
-    "type": "base"
-  }, {
-    "type": "noBorder",
-    "description": ["组件可切换的主题，在Tab组件内部可使用"]
-  }],
-  
   /**
   * 配置文档类型，目前提供两种类型的文档策略
   * ---
@@ -64,6 +57,13 @@
       }
     }
   },
+
+  "themes": [{
+    "type": "base"
+  }, {
+    "type": "noBorder",
+    "description": ["组件可切换的主题，在Tab组件内部可使用"]
+  }],
 
   "components": [{
 
