@@ -47,6 +47,7 @@
 * .builder.json细节
 * .builder.json文件本身的版本号问题
 * CSS扩展以及使用的标准方式
+* 提供标准化方案，让平台组件吸收业务组件
 
 ### 知识
 基于package.json中的bin实现命令注入的文档
