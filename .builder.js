@@ -2,6 +2,7 @@
 {
   "type": "main-right-layout",
 
+
   /**
   * 配置文档类型，目前提供两种类型的文档策略
   * ---
@@ -18,7 +19,17 @@
     "title": "两列布局组件",
     "description": ["两列布局组件，提供了两个站位嘈", "左侧是主内容显示区域，右侧是相关信息区域"],
 
-    "main": "/src/docs",
+    /**
+    * 配置不同文档的路径
+    * usage: 模块或组件的基础使用文档
+    * dome: 事例
+    */
+    "paths": {
+      "usage": "/src/docs.md",
+      "dome": "/src/dome.js"
+    }
+
+    // 文档类型，用于server端处理
     "document-type": "markdown" // jsdoc, txt
   },
 
