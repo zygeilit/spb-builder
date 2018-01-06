@@ -15,4 +15,4 @@ RUN cd ~ && \
 RUN yum -y install initscripts && \
     yum clean all
 EXPOSE 8080
-
+CMD ["service jenkins start"]
