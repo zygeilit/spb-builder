@@ -21,6 +21,8 @@ RUN yum -y install initscripts && \
 
 RUN yum -y install git && \
     git --version
+    
+RUN yum install -y sudo
 
 RUN ssh-keygen -t rsa
 
