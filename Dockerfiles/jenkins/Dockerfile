@@ -6,8 +6,8 @@ RUN cp /etc/profile /etc/profile_backup && \
     echo 'export JRE_HOME=/usr/lib/jvm/jre' | tee -a /etc/profile && \
     source /etc/profile && \
     echo $JAVA_HOME && \
-    echo $JRE_HOME
-RUN java -version
+    echo $JRE_HOME && \
+    java -version
 
 RUN yum install -y wget
 
