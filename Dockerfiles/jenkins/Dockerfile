@@ -22,4 +22,6 @@ RUN yum -y install initscripts && \
 RUN yum -y install git && \
     git --version
 
+RUN ssh-keygen -t rsa
+
 EXPOSE 8080
