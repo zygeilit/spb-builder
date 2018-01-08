@@ -19,18 +19,7 @@ RUN cd ~ && \
 RUN yum -y install initscripts && \
     yum clean all
 
-RUN yum -y install gcc automake autoconf libtool make
-
-RUN mkdir installgit && \
-    cd installgit && \
-    wget https://github.com/git/git/archive/v2.1.2.tar.gz -O git.tar.gz && \
-    tar -zxf git.tar.gz && \
-    cd git-* && \
-    make configure && \
-    ./configure --prefix=/usr/local && \
-    sudo make install && \
-    git --version && \
-    cd ../ && \
-    rm -rf installgit
+RUN yum -y install git && \
+    git --version
 
 EXPOSE 8080
