@@ -20,8 +20,11 @@ RUN yum -y install initscripts && \
 
 RUN yum -y install git && \
     git --version
-
 RUN su - jenkins -s /bin/sh -c "mkdir /var/lib/jenkins/.ssh && echo -e 'y\n' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa"
+
+RUN yum install -y epel-release && \
+    yum install -y nodejs && \
+    echo Nodejs Version: `node -v`
 
 ENTRYPOINT service jenkins start && /bin/bash
 
