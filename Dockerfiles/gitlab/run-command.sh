@@ -1,9 +1,10 @@
 sudo docker run --detach \
     --hostname gitlab.example.com \
-    --publish 127.0.0.1:443:443 --publish 127.0.0.1:80:80 --publish 127.0.0.1:22:22 \
+    --publish 443:443 --publish 80:80 --publish 22:22 \
+    --expose=80 \
     --name gitlab \
     --restart always \
     --volume /Users/zhangyue/DockerServices/gitlab/config:/etc/gitlab \
     --volume /Users/zhangyue/DockerServices/gitlab/logs:/var/log/gitlab \
     --volume /Users/zhangyue/DockerServices/gitlab/data:/var/opt/gitlab \
-    gitlab/gitlab-ce:latest
+    gitlab/gitlab-ce
