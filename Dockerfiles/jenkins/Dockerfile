@@ -10,7 +10,6 @@ RUN cp /etc/profile /etc/profile_backup && \
     java -version
 
 RUN yum install -y wget
-
 RUN cd ~ && \
     wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo && \
     rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key && \
@@ -22,12 +21,8 @@ RUN yum -y install initscripts && \
 RUN yum -y install git && \
     git --version
 
-RUN su - jenkins -s /bin/sh -c "mkdir cd /var/lib/jenkins/.ssh && echo -e 'y\n' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa"
+RUN su - jenkins -s /bin/sh -c "mkdir /var/lib/jenkins/.ssh && echo -e 'y\n' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa"
 
-ENTRYPOINT su -jenkins -s /bin/sh && \
-           cd ~/.ssh/ && \
-           cat id_rsa && \
-           cat id_rsa.pub && \
-           exit
+ENTRYPOINT service jenkins start && /bin/bash
 
 EXPOSE 8080
