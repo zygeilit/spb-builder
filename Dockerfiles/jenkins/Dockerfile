@@ -26,9 +26,11 @@ RUN yum install -y epel-release && \
     echo Nodejs Version: `node -v`
     
 RUN su - jenkins -s /bin/sh -c "mkdir /var/lib/jenkins/.ssh && echo -e 'y\n' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa" && \
+    echo '' && \
     cat /var/lib/jenkins/.ssh/id_rsa && \
     echo '' && \
-    cat /var/lib/jenkins/.ssh/id_rsa.pub
+    cat /var/lib/jenkins/.ssh/id_rsa.pub && \
+    echo ''
 
 ENTRYPOINT service jenkins start && /bin/bash
 
