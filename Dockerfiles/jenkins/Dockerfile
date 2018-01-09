@@ -22,9 +22,12 @@ RUN yum -y install initscripts && \
 RUN yum -y install git && \
     git --version
 
-ENTRYPOINT ["su - jenkins -s /bin/sh && \
-            ssh-keygen -t rsa -P '' -f ~/ && \
-            cd ~/.ssh/ && cat id_rsa && \
-            cat id_rsa.pub && exit"]
+RUN su - jenkins -s /bin/sh -c "echo -e 'yn' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa"
+
+ENTRYPOINT su -jenkins -s /bin/sh && \
+           cd ~/.ssh/ && \
+           cat id_rsa && \
+           cat id_rsa.pub && \
+           exit
 
 EXPOSE 8080
