@@ -21,9 +21,7 @@ RUN yum -y install initscripts && \
 
 RUN yum -y install git && \
     git --version
-    
-RUN yum install -y sudo
 
-RUN ssh-keygen -t rsa
+ENTRYPOINT ["su - jenkins -s /bin/sh && ssh-keygen -t rsa -P ''"]
 
 EXPOSE 8080
