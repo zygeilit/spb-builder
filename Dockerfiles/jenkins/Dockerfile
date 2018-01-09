@@ -22,7 +22,7 @@ RUN yum -y install initscripts && \
 RUN yum -y install git && \
     git --version
 
-RUN su - jenkins -s /bin/sh -c "echo -e 'yn' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa"
+RUN su - jenkins -s /bin/sh -c "mkdir cd /var/lib/jenkins/.ssh && echo -e 'y\n' | ssh-keygen -t rsa -P '' -f .ssh/id_rsa"
 
 ENTRYPOINT su -jenkins -s /bin/sh && \
            cd ~/.ssh/ && \
