@@ -1,0 +1,28 @@
+
+version: '1'
+
+services:
+  gitlab: 
+    image: gitlab/
+    expose:
+      - "22"
+      - "80"
+      - "443"
+    ports: 
+      - "22:22"
+      - "80:80"
+      - "443:443"
+
+  jenkins:
+    image: jenkins/
+    expose: 
+      - "8080"
+    ports: 
+      - "5003:8080"
+
+  doc-webserver:
+    image: doc-webserver/
+    expose: 
+      - "3000"
+    ports: 
+      - "3000:3001"
