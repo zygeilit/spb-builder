@@ -2,46 +2,47 @@
 version: '0.0.1'
 
 services:
+
   ${gitlab-service}: 
     build: ./gitlab/
     expose:
-      - "22"
-      - "80"
-      - "443"
+      - "${gitlab-port22-mapping}"
+      - "${gitlab-port80-mapping}"
+      - "${gitlab-port443-mapping}"
     links:
       - ${jenkins-service}
       - ${docservice-service}
     volumes:
-      - /Users/zhangyue/DockerServices/gitlab/config : /etc/gitlab
-      - /Users/zhangyue/DockerServices/gitlab/logs : /var/log/gitlab
-      - /Users/zhangyue/DockerServices/gitlab/data : /var/opt/gitlab
+      - ${gitlab-volumns-config} : /etc/gitlab
+      - ${gitlab-volumns-logs} : /var/log/gitlab
+      - ${gitlab-volumns-data} : /var/opt/gitlab
     ports: 
-      - "22:22"
-      - "80:80"
-      - "443:443"
+      - "${gitlab-port22-mapping}:22"
+      - "${gitlab-port80-mapping}:80"
+      - "${gitlab-port443-mapping}:443"
 
   ${jenkins-service}:
     build: ./jenkins/
     expose: 
-      - "8080"
+      - "${jenkins-port8080-mapping}"
     links:
       - ${gitlab-service}
       - ${docservice-service}
     volumes:
-      - ./jenknis/resources/ : /opt/
+      - ${jenkins-volumns} : /opt/
     ports: 
-      - "5003:8080"
+      - "${jenkins-port8080-mapping}:8080"
     command: services jenkins start && /bin/bash
 
   ${docservice-service}:
     build: ./doc-webserver/
     expose: 
-      - "3000"
+      - "${docservice-port3000-mapping}"
     links:
       - ${gitlab-service}
       - ${jenkins-service}
     volumes: 
-      - ./doc-webserver/resources/web-server : /var/spa-web-server
+      - ${docservice-volumns} : /var/spa-web-server
     ports: 
-      - "3000:3001"
+      - "${docservice-port3000-mapping}:3000"
     command: node -v && /bin/bash
