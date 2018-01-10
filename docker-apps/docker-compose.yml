@@ -1,13 +1,21 @@
 
-version: '1'
+version: '0.0.1'
 
 services:
+
   gitlab: 
     image: gitlab/
     expose:
       - "22"
       - "80"
       - "443"
+    links:
+      - jenkins
+      - doc-webserver
+    volumes:
+      - /Users/zhangyue/DockerServices/gitlab/config : /etc/gitlab
+      - /Users/zhangyue/DockerServices/gitlab/logs : /var/log/gitlab
+      - /Users/zhangyue/DockerServices/gitlab/data : /var/opt/gitlab
     ports: 
       - "22:22"
       - "80:80"
@@ -17,12 +25,24 @@ services:
     image: jenkins/
     expose: 
       - "8080"
+    links:
+      - gitlab
+      - doc-webserver
+    volumes:
+      - ./jenknis/resources/ : /opt/
     ports: 
       - "5003:8080"
+    command: services jenkins start && /bin/bash
 
   doc-webserver:
     image: doc-webserver/
     expose: 
       - "3000"
+    links:
+      - gitlab
+      - jenkins
+    volumes: 
+      - ./doc-webserver/resources/web-server : /var/spa-web-server
     ports: 
       - "3000:3001"
+    command: node -v && /bin/bash
