@@ -1,41 +1,38 @@
 
-version: '0.0.1'
+version: '3'
 
 services:
   gitlab: 
     image: gitlab/gitlab-ce
     expose:
-      - "22"
-      - "80"
-      - "443"
+      - 22
+      - 80
+      - 443
     volumes:
       - "/Users/zhangyue/DockerServices/gitlab/config:/etc/gitlab"
       - "/Users/zhangyue/DockerServices/gitlab/logs:/var/log/gitlab"
       - "/Users/zhangyue/DockerServices/gitlab/data:/var/opt/gitlab"
     ports: 
-      - "22:22"
-      - "80:80"
-      - "443:443"
+      - 22:22
+      - 80:80
+      - 443:443
 
   jenkins:
-    build: ./jenkins
-    expose: 
-      - "5004"
+    build:
+      context: ./jenkins
     links:
       - gitlab
-      - docserver
-    volumes:
-      - "./jenknis/resources/:/opt/"
     ports: 
-      - "5004:8080"
-    command: services jenkins start && /bin/bash
+      - 5002:8080
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k"
+        max-file: "10"
+    tty: true
 
   docserver:
     build: ./docserver
-    expose: 
-      - "3000"
-    volumes: 
-      - "./docserver/resources/web-server:/var/spa-web-server"
     ports: 
-      - "3000:3000"
-    command: node -v && /bin/bash
+      - 3002:3000
+    tty: true
