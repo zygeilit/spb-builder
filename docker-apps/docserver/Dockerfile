@@ -32,5 +32,3 @@ RUN npm install express-generator -g && \
     npm install express morgan cookie-parser body-parser debug serve-favicon -save
 
 ENTRYPOINT service mongod start && /bin/bash
-
-EXPOSE 3000

@@ -35,5 +35,3 @@ RUN su - jenkins -s /bin/sh -c "mkdir /var/lib/jenkins/.ssh && echo -e 'y\n' | s
     echo ''
 
 ENTRYPOINT service jenkins start && /bin/bash
-
-EXPOSE 8080
