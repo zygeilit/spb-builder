@@ -30,5 +30,4 @@ RUN npm install express-generator -g && \
     express spb-document-server && \
     cd spb-document-server && \
     npm install express morgan cookie-parser body-parser debug serve-favicon -save
-
-ENTRYPOINT service mongod start && /bin/bash
+    

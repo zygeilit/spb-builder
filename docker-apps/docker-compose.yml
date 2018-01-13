@@ -1,5 +1,5 @@
 
-version: '3'
+version: '3.2'
 
 services:
   gitlab: 
@@ -9,15 +9,20 @@ services:
       - 80
       - 443
     volumes:
-      - "/Users/zhangyue/DockerServices/gitlab/config:/etc/gitlab"
-      - "/Users/zhangyue/DockerServices/gitlab/logs:/var/log/gitlab"
-      - "/Users/zhangyue/DockerServices/gitlab/data:/var/opt/gitlab"
+      - type: volume
+        source: /Users/zhangyue/DockerServices/gitlab/config
+        target: /etc/gitlab
+      - type: volume
+        source: /Users/zhangyue/DockerServices/gitlab/logs
+        target: /var/log/gitlab
+      - type: volume
+        source: /Users/zhangyue/DockerServices/gitlab/data
+        target: /var/opt/gitlab
     ports: 
       - 22:22
       - 80:80
       - 443:443
     restart: on-failure
-    tty: true
 
   jenkins:
     build:
@@ -33,8 +38,9 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
-    tty: true
     restart: on-failure
+    stdin_open: true
+    tty: true
 
   docserver:
     build: ./docserver
@@ -42,5 +48,11 @@ services:
       - 3000
     ports: 
       - 3002:3000
-    tty: true
+    volumes: 
+      - type: volume
+        source: ./docserver/resources/web-server
+        target: /var/doc-web-server
+    command: node /var/doc-web-server/bin/www
     restart: on-failure
+    stdin_open: true
+    tty: true
