@@ -1,0 +1,3 @@
+[redis]
+URL = "tcp://redis:6379/"
+Password = ""

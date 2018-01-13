@@ -1,0 +1,53 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: node
+    static_configs:
+      - targets: ['localhost:9100']
+  - job_name: gitlab_monitor_database
+    metrics_path: /database
+    static_configs:
+      - targets: ['localhost:9168']
+  - job_name: gitlab_monitor_sidekiq
+    metrics_path: /sidekiq
+    static_configs:
+      - targets: ['localhost:9168']
+  - job_name: gitlab_monitor_process
+    metrics_path: /process
+    static_configs:
+      - targets: ['localhost:9168']
+  - job_name: kubernetes-nodes
+    scheme: https
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecure_skip_verify: true
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    kubernetes_sd_configs:
+    - role: node
+      api_server: https://kubernetes.default.svc:443
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    relabel_configs:
+    - action: labelmap
+      regex: __meta_kubernetes_node_label_(.+)
+    # Workaround Kubernetes 1.6 enforced auth on https.
+    - source_labels: [__address__]
+      action: replace
+      target_label: __address__
+      regex: ([^:;]+):(\d+)
+      replacement: ${1}:10255
+    - source_labels: [__scheme__]
+      action: replace
+      target_label: __scheme__
+      regex: https
+      replacement: http
+    metric_relabel_configs:
+    - source_labels: [pod_name]
+      target_label: environment
+      regex: (.+)-.+-.+

@@ -2,27 +2,13 @@
 version: '3'
 
 services:
-  redis:
-    restart: always
-    image: redis:3.0.7-alpine
-
-  postgresql:
-    restart: always
-    image: postgres:9.6.2-alpine
-    environment:
-      - POSTGRES_USER=gitlab
-      - POSTGRES_PASSWORD=gitlab
-      - POSTGRES_DB=gitlabhq_production
-    volumes:
-      - ./postgresql/configuration:/var/lib/postgresql:rw
-
   gitlab:
     restart: always
     image: gitlab/gitlab-ce:9.1.0-ce.0
     hostname: 'gitlab.example.com'
     links:
-      - postgresql:postgresql
-      - redis:redis
+      - postgresql
+      - redis
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         postgresql['enable'] = false
@@ -36,15 +22,30 @@ services:
         redis['enable'] = false
         gitlab_rails['redis_host'] = 'redis'
         gitlab_rails['redis_port'] = '6379'
-        external_url 'http://gitlab.example.com:30080'
-        gitlab_rails['gitlab_shell_ssh_port'] = 30022
+        external_url 'http://gitlab.example.com:80'
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
     ports:
-        - 30080:30080
-        - 30022:22
+        - 80:80
+        - 22:22
+        - 443:443
     volumes:
       - ./gitlab/configuration/config:/etc/gitlab:rw
       - ./gitlab/configuration/logs:/var/log/gitlab:rw
       - ./gitlab/configuration/data:/var/opt/gitlab:rw
+
+  redis:
+    restart: always
+    image: redis:3.0.7-alpine
+
+  postgresql:
+    restart: always
+    image: postgres:9.6.2-alpine
+    environment:
+      - POSTGRES_USER=gitlab
+      - POSTGRES_PASSWORD=gitlab
+      - POSTGRES_DB=gitlabhq_production
+    volumes:
+      - ./postgresql/configuration:/var/lib/postgresql:rw
 
   jenkins:
     restart: always

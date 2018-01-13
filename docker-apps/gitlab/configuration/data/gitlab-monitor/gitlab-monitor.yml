@@ -1,0 +1,34 @@
+server:
+  listen_address: localhost
+  listen_port: 9168
+
+probes:
+  database:
+    multiple: true
+    dead_tuples_count:
+      class_name: Database::TuplesProber
+      methods:
+        - probe_db
+      opts:
+        connection_string: dbname=gitlabhq_production user=gitlab host=/var/opt/gitlab/postgresql
+  process:
+    methods:
+      - probe_memory
+      - probe_age
+      - probe_count
+    opts:
+      - pid_or_pattern: "sidekiq .* \\[.*?\\]"
+        name: sidekiq
+      - pid_or_pattern: "unicorn worker\\[.*?\\]"
+        name: unicorn
+      - pid_or_pattern: "git-upload-pack --stateless-rpc"
+        name: git_upload_pack
+        quantiles: true
+  sidekiq:
+    methods:
+      - probe_queues
+      - probe_jobs
+      - probe_workers
+      - probe_retries
+    opts:
+      redis_url: "redis://redis/"
