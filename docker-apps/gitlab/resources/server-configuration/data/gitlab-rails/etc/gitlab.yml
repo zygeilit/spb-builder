@@ -10,7 +10,7 @@ production: &base
   ## GitLab settings
   gitlab:
     ## Web server settings (note: host is the FQDN, do not include http://)
-    host: 26a1c80d9849
+    host: 0f63d4171273
     port: 80
     https: false
 
@@ -38,7 +38,7 @@ production: &base
     # Uncomment and set to false if you need to disable email sending from GitLab (default: true)
     email_enabled: 
     # Email address used in the "From" field in mails sent by GitLab
-    email_from: gitlab@26a1c80d9849
+    email_from: gitlab@0f63d4171273
     email_display_name: 
     email_reply_to: 
     email_subject_suffix: 

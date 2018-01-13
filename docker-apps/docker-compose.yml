@@ -1,5 +1,5 @@
 
-version: '3.2'
+version: '3'
 
 services:
   gitlab: 
@@ -9,15 +9,9 @@ services:
       - 80
       - 443
     volumes:
-      - type: volume
-        source: ./gitlab/resources/server-configuration/config
-        target: /etc/gitlab
-      - type: volume
-        source: ./gitlab/resources/server-configuration/logs
-        target: /var/log/gitlab
-      - type: volume
-        source: ./gitlab/resources/server-configuration/data
-        target: /var/opt/gitlab
+      - "./gitlab/resources/server-configuration/config:/etc/gitlab"
+      - "./gitlab/resources/server-configuration/logs:/var/log/gitlab"
+      - "./gitlab/resources/server-configuration/data:/var/opt/gitlab"
     ports: 
       - 22:22
       - 80:80
@@ -49,9 +43,7 @@ services:
     ports: 
       - 3002:3000
     volumes: 
-      - type: volume
-        source: ./docserver/resources/web-server
-        target: /var/doc-web-server
+      - "./docserver/resources/web-server:/var/doc-web-server"
     command: node /var/doc-web-server/bin/www
     restart: on-failure
     stdin_open: true
