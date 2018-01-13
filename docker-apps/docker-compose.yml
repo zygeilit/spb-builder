@@ -10,13 +10,13 @@ services:
       - 443
     volumes:
       - type: volume
-        source: /Users/zhangyue/DockerServices/gitlab/config
+        source: ./gitlab/resources/server-configuration/config
         target: /etc/gitlab
       - type: volume
-        source: /Users/zhangyue/DockerServices/gitlab/logs
+        source: ./gitlab/resources/server-configuration/logs
         target: /var/log/gitlab
       - type: volume
-        source: /Users/zhangyue/DockerServices/gitlab/data
+        source: ./gitlab/resources/server-configuration/data
         target: /var/opt/gitlab
     ports: 
       - 22:22
