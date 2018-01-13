@@ -14,7 +14,7 @@ services:
       - POSTGRES_PASSWORD=gitlab
       - POSTGRES_DB=gitlabhq_production
     volumes:
-      - ./postgresql/resources/server-configuration:/var/lib/postgresql:rw
+      - ./postgresql/configuration:/var/lib/postgresql:rw
 
   gitlab:
     restart: always
@@ -42,9 +42,9 @@ services:
         - 30080:30080
         - 30022:22
     volumes:
-      - ./gitlab/resources/server-configuration/config:/etc/gitlab:rw
-      - ./gitlab/resources/server-configuration/logs:/var/log/gitlab:rw
-      - ./gitlab/resources/server-configuration/data:/var/opt/gitlab:rw
+      - ./gitlab/configuration/config:/etc/gitlab:rw
+      - ./gitlab/configuration/logs:/var/log/gitlab:rw
+      - ./gitlab/configuration/data:/var/opt/gitlab:rw
 
   jenkins:
     restart: always
@@ -73,7 +73,7 @@ services:
     ports: 
       - 3002:3000
     volumes: 
-      - ./docserver/resources/web-server:/var/doc-web-server:rw
+      - ./docserver/resources:/var/external-resources:rw
     command: node /var/doc-web-server/bin/www
     stdin_open: true
     tty: true
