@@ -34,4 +34,4 @@ bower_components/
 /components
 /actions
 
-/Dockerfiles/spb-document-webserver/project/node_modules
+/docker-apps/resources/web-server/node_modules
