@@ -2,23 +2,52 @@
 version: '3'
 
 services:
-  gitlab: 
-    image: gitlab/gitlab-ce
-    expose:
-      - 22
-      - 80
-      - 443
+  redis:
+    restart: always
+    image: redis:3.0.7-alpine
+
+  postgresql:
+    restart: always
+    image: postgres:9.6.2-alpine
+    environment:
+      - POSTGRES_USER=gitlab
+      - POSTGRES_PASSWORD=gitlab
+      - POSTGRES_DB=gitlabhq_production
     volumes:
-      - "./gitlab/resources/server-configuration/config:/etc/gitlab"
-      - "./gitlab/resources/server-configuration/logs:/var/log/gitlab"
-      - "./gitlab/resources/server-configuration/data:/var/opt/gitlab"
-    ports: 
-      - 22:22
-      - 80:80
-      - 443:443
-    restart: on-failure
+      - ./postgresql/resources/server-configuration:/var/lib/postgresql:rw
+
+  gitlab:
+    restart: always
+    image: gitlab/gitlab-ce:9.1.0-ce.0
+    hostname: 'gitlab.example.com'
+    links:
+      - postgresql:postgresql
+      - redis:redis
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        postgresql['enable'] = false
+        gitlab_rails['db_username'] = "gitlab"
+        gitlab_rails['db_password'] = "gitlab"
+        gitlab_rails['db_host'] = "postgresql"
+        gitlab_rails['db_port'] = "5432"
+        gitlab_rails['db_database'] = "gitlabhq_production"
+        gitlab_rails['db_adapter'] = 'postgresql'
+        gitlab_rails['db_encoding'] = 'utf8'
+        redis['enable'] = false
+        gitlab_rails['redis_host'] = 'redis'
+        gitlab_rails['redis_port'] = '6379'
+        external_url 'http://gitlab.example.com:30080'
+        gitlab_rails['gitlab_shell_ssh_port'] = 30022
+    ports:
+        - 30080:30080
+        - 30022:22
+    volumes:
+      - ./gitlab/resources/server-configuration/config:/etc/gitlab:rw
+      - ./gitlab/resources/server-configuration/logs:/var/log/gitlab:rw
+      - ./gitlab/resources/server-configuration/data:/var/opt/gitlab:rw
 
   jenkins:
+    restart: always
     build:
       context: ./jenkins
     links:
@@ -32,19 +61,19 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
-    restart: on-failure
+    
     stdin_open: true
     tty: true
 
   docserver:
+    restart: always
     build: ./docserver
     expose:
       - 3000
     ports: 
       - 3002:3000
     volumes: 
-      - "./docserver/resources/web-server:/var/doc-web-server"
+      - ./docserver/resources/web-server:/var/doc-web-server:rw
     command: node /var/doc-web-server/bin/www
-    restart: on-failure
     stdin_open: true
     tty: true
