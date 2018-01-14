@@ -1,51 +1,24 @@
 
-version: '3'
+version: '3.4'
 
 services:
+
   gitlab:
     restart: always
-    image: gitlab/gitlab-ce:9.1.0-ce.0
+    image: gitlab/gitlab-ce
     hostname: 'gitlab.example.com'
-    links:
-      - postgresql
-      - redis
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        postgresql['enable'] = false
-        gitlab_rails['db_username'] = "gitlab"
-        gitlab_rails['db_password'] = "gitlab"
-        gitlab_rails['db_host'] = "postgresql"
-        gitlab_rails['db_port'] = "5432"
-        gitlab_rails['db_database'] = "gitlabhq_production"
-        gitlab_rails['db_adapter'] = 'postgresql'
-        gitlab_rails['db_encoding'] = 'utf8'
-        redis['enable'] = false
-        gitlab_rails['redis_host'] = 'redis'
-        gitlab_rails['redis_port'] = '6379'
-        external_url 'http://gitlab.example.com:80'
-        gitlab_rails['gitlab_shell_ssh_port'] = 22
+    expose:
+      - "80"
+      - "22"
+      - "443"
     ports:
-        - 80:80
-        - 22:22
-        - 443:443
+      - "80:80"
+      - "22:22"
+      - "443:443"
     volumes:
-      - ./gitlab/configuration/config:/etc/gitlab:rw
-      - ./gitlab/configuration/logs:/var/log/gitlab:rw
-      - ./gitlab/configuration/data:/var/opt/gitlab:rw
-
-  redis:
-    restart: always
-    image: redis:3.0.7-alpine
-
-  postgresql:
-    restart: always
-    image: postgres:9.6.2-alpine
-    environment:
-      - POSTGRES_USER=gitlab
-      - POSTGRES_PASSWORD=gitlab
-      - POSTGRES_DB=gitlabhq_production
-    volumes:
-      - ./postgresql/configuration:/var/lib/postgresql:rw
+      - "/Users/zhangyue/DockerServices/gitlab1/config:/etc/gitlab"
+      - "/Users/zhangyue/DockerServices/gitlab1/logs:/var/log/gitlab"
+      - "/Users/zhangyue/DockerServices/gitlab1/data:/var/opt/gitlab"
 
   jenkins:
     restart: always
@@ -54,9 +27,9 @@ services:
     links:
       - gitlab
     expose:
-      - 8080
+      - "8080"
     ports: 
-      - 5002:8080
+      - "5002:8080"
     logging:
       driver: json-file
       options:
@@ -70,9 +43,9 @@ services:
     restart: always
     build: ./docserver
     expose:
-      - 3000
+      - "3000"
     ports: 
-      - 3002:3000
+      - "3002:3000"
     volumes: 
       - ./docserver/resources:/var/external-resources:rw
     command: node /var/doc-web-server/bin/www
